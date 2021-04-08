@@ -1,0 +1,99 @@
+app-id: br.gov.economia.receita.IRPF
+branch: stable
+runtime: org.freedesktop.Platform
+runtime-version: '20.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk11
+command: irpf.sh
+finish-args:
+  - --share=network
+  - --socket=x11
+  - --share=ipc
+  - --device=dri
+  - --socket=pulseaudio
+  - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+  - --env=JAVA_HOME=/app/jre
+  - --filesystem=~/ProgramasRFB:create
+  # User-defined preferences, such as hiding the welcome window, are stored under ~/.java/.userPrefs
+  - --persist=.java
+  # A file named ".cacheni.properties" is used to cache user-provided form data (such as CPF and CNPJ numbers)
+  # But since we don't know what else can be stored here, we make the entire directory persistent.
+  - --persist=.rfb
+  # Log files
+  # - --persist=.receitanet
+modules:
+  - name: irpf
+    buildsystem: simple
+    build-options:
+      env:
+        PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk11/bin
+        JAVA_HOME: /usr/lib/sdk/openjdk11/jvm/openjdk-11
+    build-commands:
+      - install -Dm755 -t "${FLATPAK_DEST}/bin" "irpf.sh"
+      - install -Dm644 -t "${FLATPAK_DEST}/share/applications" "br.gov.economia.receita.IRPF.desktop"
+      - install -Dm644 "icon-64.png" "${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/br.gov.economia.receita.IRPF.png"
+      - install -Dm644 "icon-128.png" "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/br.gov.economia.receita.IRPF.png"
+      - install -Dm644 "icon-256.png" "${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/br.gov.economia.receita.IRPF.png"
+      - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "br.gov.economia.receita.IRPF.metainfo.xml"
+      - mkdir -p "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF"
+      - cp -r irpf.jar pgd-updater.jar help/ lib/ lib-modulos/ "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF"
+      - cp *.xml "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF/lib/resources"
+      # Workaround to make opening URLs in default browser work
+      - ln -s "/usr/bin/xdg-open" "${FLATPAK_DEST}/bin/firefox"
+    sources:
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.2.zip
+        sha256: bcc056d940581a4d6be396633bb87b421dc04c96146f174a3add497f3a1adafa
+      # A bunch of XML resource files below
+      # Check for updates here: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/latest.xml
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BANCO__20210329_20210329021545.zip
+        sha256: 5b6d555161981cbd6e72c72bbbc6260450d74f84f511a29c66420e3285b5624f
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BBENS__20210329_20210329021545.zip
+        sha256: 95ed67ae506ffd50e08dd3ace113247ccfa87dd8c0a6adc57b8a8b48b8ecbf82
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BENSD__20210224_20210224073308.zip
+        sha256: 554fc38dd443e551dd64fb17f78ebf6ef131bc0ac71ee3cdcbab17f091f29617
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/DEPEN__20210113_20210223210626.zip
+        sha256: b5c9e8fe92ccc77b3ce960b79225fc90d650f7e108e0eec1e6aab7f6775f52ab
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/DIVID__20210113_20210223210626.zip
+        sha256: a16dcc37859e49fb7e1744237253f3bd6ec8352080c039106bd25e9e68c666d7
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/ECA__20201204_20210223210626.zip
+        sha256: 170cc4fb2368860628540dab04baf03c2a5f32d9d462f571ef0bd215a2acba7e
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/IDOSO__20201207_20210223210626.zip
+        sha256: f7baeae09c36ce1c859fd9557aa16be302764b6e4a7cdcd884667c8702db070d
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/NATOC__20210113_20210223210626.zip
+        sha256: 28c6f4c4d1ca2c07909a12af04799677bf2382d828db34c2eca3840c922b426f
+        strip-components: 2
+      - type: file
+        path: irpf.sh
+      - type: file
+        path: br.gov.economia.receita.IRPF.metainfo.xml
+      - type: file
+        path: br.gov.economia.receita.IRPF.desktop
+      - type: file
+        path: icon-64.png
+      - type: file
+        path: icon-128.png
+      - type: file
+        path: icon-256.png
+    modules:
+      - name: openjdk
+        buildsystem: simple
+        build-commands:
+          - /usr/lib/sdk/openjdk11/install.sh
+

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=IRPF 2021
+GenericName=Imposto de Renda Pessoa Física
+Comment=Programa de Declaração de Imposto sobre a Renda
+Icon=br.gov.economia.receita.IRPF
+Exec=/app/bin/irpf.sh
+Categories=Network;
+Keywords=irpf;receitanet;
+Type=Application
+Terminal=false

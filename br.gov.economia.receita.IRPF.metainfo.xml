@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>br.gov.economia.receita.IRPF</id>
+  <name>IRPF 2021</name>
+  <launchable type="desktop-id">br.gov.economia.receita.IRPF.desktop</launchable>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <developer_name>Serpro</developer_name>
+  <summary>Programa de Declaração do Imposto sobre a Renda</summary>
+  <description><p>Preenche as declarações de Ajuste Anual, Final de Espólio e Saída Definitiva do País 2021, referentes aos rendimentos recebidos durante o ano-calendário de 2020 e para efetuar todos os cálculos necessários à apuração do imposto.</p></description>
+  <url type="homepage">https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda</url>
+  <content_rating type="oars-1.1"/>
+  <releases>
+    <release date="2021-03-09" version="2021-1.2-20210329"/>
+  </releases>
+</component>
