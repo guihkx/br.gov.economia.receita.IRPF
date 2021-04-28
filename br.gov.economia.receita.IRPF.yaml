@@ -43,8 +43,8 @@ modules:
       - ln -s "/usr/bin/xdg-open" "${FLATPAK_DEST}/bin/firefox"
     sources:
       - type: archive
-        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.2.zip
-        sha256: bcc056d940581a4d6be396633bb87b421dc04c96146f174a3add497f3a1adafa
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.3.zip
+        sha256: b980bf96dd9a5bf5b651912de8b68b929a725b61caf853387959eb36749e6421
       # A bunch of XML resource files below
       # Check for updates here: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/latest.xml
       - type: archive
@@ -58,6 +58,10 @@ modules:
       - type: archive
         url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BENSD__20210224_20210224073308.zip
         sha256: 554fc38dd443e551dd64fb17f78ebf6ef131bc0ac71ee3cdcbab17f091f29617
+        strip-components: 2
+      - type: archive
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/CFVAL__20210428_20210428082406.zip
+        sha256: ecca622da7ff4bf3b5339986d6b92ae3e9875c84be8fd87526776fb3ef464ab0
         strip-components: 2
       - type: archive
         url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/DEPEN__20210113_20210223210626.zip
