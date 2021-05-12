@@ -43,8 +43,8 @@ modules:
       - ln -s "/usr/bin/xdg-open" "${FLATPAK_DEST}/bin/firefox"
     sources:
       - type: archive
-        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.3.zip
-        sha256: b980bf96dd9a5bf5b651912de8b68b929a725b61caf853387959eb36749e6421
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.4.zip
+        sha256: 017b0794aec801e1abd88ba84ba127a9a9cd2fcc08f2cd52a61339421bef84aa
       # A bunch of XML resource files below
       # Check for updates here: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/latest.xml
       - type: archive
