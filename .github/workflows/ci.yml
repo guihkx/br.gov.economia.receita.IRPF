@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up environment
-      - uses: mikefarah/yq@v4.8.0
+        uses: mikefarah/yq@v4.8.0
         id: props
         env:
           TZ: America/Sao_Paulo
