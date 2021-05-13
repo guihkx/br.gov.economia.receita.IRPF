@@ -10,14 +10,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: mikefarah/yq@v4.8.0
 
-      - name: Set env
-        run: echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
+      - name: Set up environment
+        env:
+          TZ: America/Sao_Paulo
+        run: |
+          REPO_NAME=$(echo "$GITHUB_REPOSITORY" | awk -F / '{print $2}')
+          echo ::set-env name=REPO_NAME::$REPO_NAME
+          echo ::set-env name=SHA_SHORT::$(git rev-parse --short HEAD)
+          echo ::set-env name=IRPF_VER::$(cat "$REPO_NAME.yaml" | yq e '.modules[] | select(.name == "irpf").sources[] | select(.url == "*IRPF*.zip").url' - | sed -r 's/.*IRPF([0-9.-]+)\.zip/\1/')
+          echo ::set-env name=TODAY::$(date +'%Y%m%d')
 
       - name: Install dependencies
         run: |
           sudo apt update
           sudo apt install -y flatpak-builder
+
+      - name: Cache Flatpak SDK
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.local/share/flatpak
 
       - name: Set up Flatpak
         run: |
@@ -25,16 +39,15 @@ jobs:
 
       - name: Build (x86_64)
         run: |
-          flatpak-builder --user --arch=x86_64 --force-clean --install-deps-from=flathub --repo=repo/ --sandbox build/ br.gov.economia.receita.IRPF.yaml
+          flatpak-builder --user --arch=x86_64 --force-clean --install-deps-from=flathub --repo=repo/ --sandbox build/ "${{ env.REPO_NAME }}.yaml"
 
       - name: Bundle (x86_64)
         run: |
-          flatpak build-bundle --arch=x86_64 repo/ "IRPF_${{ env.RELEASE_VERSION }}-${{ github.sha }}.flatpak" br.gov.economia.receita.IRPF stable
+          flatpak build-bundle --arch=x86_64 repo/ "IRPF_v${{ env.IRPF_VER }}-${{ env.TODAY }}-${{ env.SHA_SHORT }}-x86_64.flatpak" "${{ env.REPO_NAME }}" stable
 
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: irpf-x86_64
           path: |
             *.flatpak
             
