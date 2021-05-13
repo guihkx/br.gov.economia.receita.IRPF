@@ -26,6 +26,13 @@ jobs:
         with:
           cmd: |
             echo ::set-output name=VERSION::$(cat "${{ steps.vars.outputs.REPO_NAME }}.yaml" | yq e '.modules[] | select(.name == "irpf").sources[] | select(.url == "*IRPF*.zip").url' - | sed -r 's/.*IRPF([0-9.-]+)\.zip/\1/')
+            echo ::set-output name=ARTIFACT_NAME::IRPF_v${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}
+
+      - name: Update metainfo.xml
+        env:
+          TZ: America/Sao_Paulo
+        run: |
+          sed -i "/<release /d; /<releases>/a\    <release date=\"$(date +'%Y-%m-%d')\" version=\"${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}\">" "${{ steps.vars.outputs.REPO_NAME }}.metainfo.xml"
 
       - name: Install dependencies
         run: |
@@ -49,12 +56,11 @@ jobs:
 
       - name: Bundle (x86_64)
         run: |
-          flatpak build-bundle --arch=x86_64 repo/ x86_64.flatpak "${{ steps.vars.outputs.REPO_NAME }}" stable
+          flatpak build-bundle --arch=x86_64 repo/ "${{ steps.irpf.outputs.ARTIFACT_NAME }}-x86_64.flatpak" "${{ steps.vars.outputs.REPO_NAME }}" stable
 
       - name: Upload (x86_64)
         uses: actions/upload-artifact@v2
         with:
-          name: IRPF_v${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}-x86_64.flatpak
+          name: ${{ steps.irpf.outputs.ARTIFACT_NAME }}-x86_64.flatpak
           path: |
-            *.flatpak
-            
+            ${{ steps.irpf.outputs.ARTIFACT_NAME }}-x86_64.flatpak
