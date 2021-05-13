@@ -29,7 +29,7 @@ jobs:
 
       - name: Set artifact name
         id: artifact
-        rui: |
+        run: |
           echo ::set-output name=NAME::IRPF_v${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}
 
       - name: Update metainfo.xml
