@@ -26,7 +26,12 @@ jobs:
         with:
           cmd: |
             echo ::set-output name=VERSION::$(cat "${{ steps.vars.outputs.REPO_NAME }}.yaml" | yq e '.modules[] | select(.name == "irpf").sources[] | select(.url == "*IRPF*.zip").url' - | sed -r 's/.*IRPF([0-9.-]+)\.zip/\1/')
-            echo ::set-output name=ARTIFACT_NAME::IRPF_v${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}
+
+      - name: Set artifact name
+        id: artifact
+        with:
+          cmd: |
+            echo ::set-output name=NAME::IRPF_v${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}
 
       - name: Update metainfo.xml
         env:
@@ -35,6 +40,7 @@ jobs:
           echo VERSION: ${{ steps.irpf.outputs.VERSION }}
           echo TODAY: ${{ steps.vars.outputs.TODAY }}
           echo SHA_SHORT: ${{ steps.vars.outputs.SHA_SHORT }}
+          echo NAME: ${{ steps.artifact.outputs.NAME }}
           sed -i "/<release /d; /<releases>/a\    <release date=\"$(date +'%Y-%m-%d')\" version=\"${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}\">" "${{ steps.vars.outputs.REPO_NAME }}.metainfo.xml"
           cat "${{ steps.vars.outputs.REPO_NAME }}.metainfo.xml"
           false
@@ -61,11 +67,11 @@ jobs:
 
       - name: Bundle (x86_64)
         run: |
-          flatpak build-bundle --arch=x86_64 repo/ "${{ steps.irpf.outputs.ARTIFACT_NAME }}-x86_64.flatpak" "${{ steps.vars.outputs.REPO_NAME }}" stable
+          flatpak build-bundle --arch=x86_64 repo/ "${{ steps.artifact.outputs.NAME }}-x86_64.flatpak" "${{ steps.vars.outputs.REPO_NAME }}" stable
 
       - name: Upload (x86_64)
         uses: actions/upload-artifact@v2
         with:
-          name: ${{ steps.irpf.outputs.ARTIFACT_NAME }}-x86_64.flatpak
+          name: ${{ steps.artifact.outputs.NAME }}-x86_64.flatpak
           path: |
-            ${{ steps.irpf.outputs.ARTIFACT_NAME }}-x86_64.flatpak
+            ${{ steps.artifact.outputs.NAME }}-x86_64.flatpak
