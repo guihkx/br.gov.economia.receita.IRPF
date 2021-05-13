@@ -31,6 +31,7 @@ jobs:
       - name: Cache Flatpak SDK
         uses: actions/cache@v2
         with:
+          key: forever
           path: |
             ~/.local/share/flatpak
 
