@@ -32,6 +32,7 @@ jobs:
         env:
           TZ: America/Sao_Paulo
         run: |
+          echo ${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}
           sed -i "/<release /d; /<releases>/a\    <release date=\"$(date +'%Y-%m-%d')\" version=\"${{ steps.irpf.outputs.VERSION }}-${{ steps.vars.outputs.TODAY }}-${{ steps.vars.outputs.SHA_SHORT }}\">" "${{ steps.vars.outputs.REPO_NAME }}.metainfo.xml"
           cat "${{ steps.vars.outputs.REPO_NAME }}.metainfo.xml"
           false
