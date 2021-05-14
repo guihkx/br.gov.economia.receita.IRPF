@@ -5,6 +5,6 @@ Comment=Programa de Declaração de Imposto sobre a Renda da Pessoa Física
 Icon=br.gov.economia.receita.IRPF
 Exec=/app/bin/irpf.sh
 Categories=Network;
-Keywords=irpf;receitanet;
+Keywords=dirpf;irpf;receitanet;
 Type=Application
 Terminal=false
