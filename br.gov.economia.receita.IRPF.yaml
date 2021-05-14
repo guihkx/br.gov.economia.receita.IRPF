@@ -34,17 +34,35 @@ modules:
       - install -Dm644 "icon-128.png" "${FLATPAK_DEST}/share/icons/hicolor/128x128/apps/br.gov.economia.receita.IRPF.png"
       - install -Dm644 "icon-256.png" "${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/br.gov.economia.receita.IRPF.png"
       - install -Dm644 -t "${FLATPAK_DEST}/share/metainfo" "br.gov.economia.receita.IRPF.metainfo.xml"
-      - mkdir -p "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF"
-      - cp -r irpf.jar pgd-updater.jar help/ lib/ lib-modulos/ "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF"
-      - cp *.xml "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF/lib/resources"
-      # Workaround to make opening URLs in default browser work
+      - install -Dm644 -t "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF" "irpf.jar" "pgd-updater.jar"
+      - cp -r --no-preserve=mode help/ lib/ lib-modulos/ "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF"
+      # Workaround: Make the clickable link on the "About" window open in the default web browser
+      # Keep in mind that many other clickable links (and menu items that open URLs) still won't work until this patch gets accepted:
+      # https://github.com/flathub/org.freedesktop.Sdk.Extension.openjdk11/pull/16
       - ln -s "/usr/bin/xdg-open" "${FLATPAK_DEST}/bin/firefox"
     sources:
       - type: archive
         url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.4.zip
         sha256: 017b0794aec801e1abd88ba84ba127a9a9cd2fcc08f2cd52a61339421bef84aa
-      # A bunch of XML resource files below
-      # Check for updates here: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/latest.xml
+      - type: file
+        path: irpf.sh
+      - type: file
+        path: br.gov.economia.receita.IRPF.metainfo.xml
+      - type: file
+        path: br.gov.economia.receita.IRPF.desktop
+      - type: file
+        path: icon-64.png
+      - type: file
+        path: icon-128.png
+      - type: file
+        path: icon-256.png
+  # A bunch of XML resource files below
+  # Check for updates here: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/latest.xml
+  - name: irpf_xml
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 *.xml "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF/lib/resources"
+    sources:
       - type: archive
         url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BANCO__20210329_20210329021545.zip
         sha256: 5b6d555161981cbd6e72c72bbbc6260450d74f84f511a29c66420e3285b5624f
@@ -81,18 +99,6 @@ modules:
         url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/NATOC__20210113_20210223210626.zip
         sha256: 28c6f4c4d1ca2c07909a12af04799677bf2382d828db34c2eca3840c922b426f
         strip-components: 2
-      - type: file
-        path: irpf.sh
-      - type: file
-        path: br.gov.economia.receita.IRPF.metainfo.xml
-      - type: file
-        path: br.gov.economia.receita.IRPF.desktop
-      - type: file
-        path: icon-64.png
-      - type: file
-        path: icon-128.png
-      - type: file
-        path: icon-256.png
     modules:
       - name: openjdk
         buildsystem: simple
