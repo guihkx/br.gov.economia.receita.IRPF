@@ -13,13 +13,17 @@ finish-args:
   - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
   - --env=JAVA_HOME=/app/jre
   - --filesystem=~/ProgramasRFB:create
-  # User-defined preferences, such as hiding the welcome window, are stored under ~/.java/.userPrefs
+  # Note to self:
+  # The program has an auto-update feature which temporarily downloads files to: ~/.irpf
+  # Then, it tries to move these files to /app, but it fails because it lacks write access.
+  # --persist=.irpf
+  # User-defined preferences (such as hiding the welcome window) are stored under: ~/.java/.userPrefs/serpro/ppgd/irpf/prefs.xml
   - --persist=.java
-  # A file named ".cacheni.properties" is used to cache user-provided form data (such as CPF and CNPJ numbers)
-  # But since we don't know what else can be stored here, we make the entire directory persistent.
+  # Log files, tokens and whatnot.
+  - --persist=.receitanet
+  # User-provided form data (such as CPF and CNPJ numbers) are stored under: ~/.rfb/.cacheni.properties
   - --persist=.rfb
-  # Log files
-  # - --persist=.receitanet
+
 modules:
   - name: irpf
     buildsystem: simple
