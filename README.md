@@ -12,7 +12,7 @@ Versões prontas estão disponíveis para download na página [*Releases*](https
 
     ```bash
     cd ~/Downloads
-    flatpak install IRPF_v2021-1.2-x86_64.flatpak
+    flatpak install IRPF_v*-x86_64.flatpak
     ```
 
 4. Digite sua senha e confirme a instalação
