@@ -46,8 +46,8 @@ modules:
       - ln -s "/usr/bin/xdg-open" "${FLATPAK_DEST}/bin/firefox"
     sources:
       - type: archive
-        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.6.zip
-        sha256: 0968a8b527ae3ff3edeec8015e03e6dfb36aa1e8285a1069c6efe9656822520a
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.7.zip
+        sha256: 29b69dd931349a79549913ed69a1f886cbbb0837a512b639b5d446cde176847c
       - type: file
         path: irpf.sh
       - type: file
