@@ -11,6 +11,7 @@
   <url type="homepage">https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda</url>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release date="2021-07-20" version="2021-1.8-20210720"/>
     <release date="2021-06-15" version="2021-1.8-20210615"/>
     <release date="2021-06-08" version="2021-1.7-20210608"/>
     <release date="2021-06-02" version="2021-1.7-20210602"/>
