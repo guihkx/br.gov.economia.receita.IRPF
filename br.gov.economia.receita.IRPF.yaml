@@ -68,12 +68,12 @@ modules:
       - install -Dm644 *.xml "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF/lib/resources"
     sources:
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BANCO__20210329_20210329021545.zip
-        sha256: 5b6d555161981cbd6e72c72bbbc6260450d74f84f511a29c66420e3285b5624f
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BANCO__20210720_20210720022239.zip
+        sha256: 3d98c3e531957077d62b8e760c41c17cb45d2b65d3a9fded05cfc30cfa0e3868
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BBENS__20210329_20210329021545.zip
-        sha256: 95ed67ae506ffd50e08dd3ace113247ccfa87dd8c0a6adc57b8a8b48b8ecbf82
+        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BBENS__20210720_20210720022239.zip
+        sha256: 5bb535554afee275c7d702f41bd9986ab00478448adb43ad13eb47585e766e49
         strip-components: 2
       - type: archive
         url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BENSD__20210224_20210224073308.zip
