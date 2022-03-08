@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <component type="desktop-application">
   <id>br.gov.economia.receita.IRPF</id>
-  <name>IRPF 2021</name>
+  <name>IRPF 2022</name>
   <launchable type="desktop-id">br.gov.economia.receita.IRPF.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>LicenseRef-proprietary</project_license>
   <developer_name>SERPRO</developer_name>
   <summary>Programa de Declaração de Imposto sobre a Renda da Pessoa Física</summary>
-  <description><p>Preenche as declarações de Ajuste Anual, Final de Espólio e Saída Definitiva do País 2021, referentes aos rendimentos recebidos durante o ano-calendário de 2020 e para efetuar todos os cálculos necessários à apuração do imposto.</p></description>
+  <description><p>Preenche as declarações de Ajuste Anual, Final de Espólio e Saída Definitiva do País 2022, referentes aos rendimentos recebidos durante o ano-calendário de 2020 e para efetuar todos os cálculos necessários à apuração do imposto.</p></description>
   <url type="homepage">https://www.gov.br/receitafederal/pt-br/assuntos/meu-imposto-de-renda</url>
   <content_rating type="oars-1.1"/>
   <releases>
+    <release date="2022-03-08" version="2022-1.0-20220308"/>
     <release date="2021-09-25" version="2021-1.9-20210925"/>
     <release date="2021-07-20" version="2021-1.8-20210720"/>
     <release date="2021-06-15" version="2021-1.8-20210615"/>

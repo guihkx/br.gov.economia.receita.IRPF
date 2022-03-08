@@ -46,8 +46,8 @@ modules:
       - ln -s "/usr/bin/xdg-open" "${FLATPAK_DEST}/bin/firefox"
     sources:
       - type: archive
-        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/arquivos/IRPF2021-1.9.zip
-        sha256: 1d0cdbb00e141caf2d65b85be88b560b86b3633bf117b7d34221659b89c8e5ee
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/arquivos/IRPF2022-1.0.zip
+        sha256: 91fe293c0daa1ac857640f9d66c6f2db117df07427a17c74e7fe518fdddc73bc
       - type: file
         path: irpf.sh
       - type: file
@@ -60,48 +60,72 @@ modules:
         path: icon-128.png
       - type: file
         path: icon-256.png
-  # A bunch of XML resource files below
-  # Check for updates here: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/latest.xml
   - name: irpf_xml
     buildsystem: simple
     build-commands:
       - install -Dm644 *.xml "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF/lib/resources"
+  # A bunch of zipped, XML resource files below
+  # These can be generated using the 'gen_zip_assets.py' script under the 'tools' directory
     sources:
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BANCO__20210720_20210720022239.zip
-        sha256: 3d98c3e531957077d62b8e760c41c17cb45d2b65d3a9fded05cfc30cfa0e3868
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/AJUST__20211221_20220305123016.zip
+        sha256: 8ad0d5956c9b8387a146e7abf293609aa7f85566a651e0ad89b8ebc3e8b60a12
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BBENS__20210720_20210720022239.zip
-        sha256: 5bb535554afee275c7d702f41bd9986ab00478448adb43ad13eb47585e766e49
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/BANCO__20220305_20220305123016.zip
+        sha256: fd812581f2e0ff7824319f9b61a10847c97e9c2a8feb34dbfc364f8bf03ed864
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/BENSD__20210224_20210224073308.zip
-        sha256: 554fc38dd443e551dd64fb17f78ebf6ef131bc0ac71ee3cdcbab17f091f29617
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/BBENS__20220305_20220305123016.zip
+        sha256: 2ea37172ee1590dab7d0479e98f7b0badeae59dfaed350a23c25620fc762fd6a
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/CFVAL__20210428_20210428082406.zip
-        sha256: ecca622da7ff4bf3b5339986d6b92ae3e9875c84be8fd87526776fb3ef464ab0
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/BENSD__20220305_20220305201914.zip
+        sha256: 16df7816469f8774563f5b70b2d42cb0bf9c841e1fd3d331c2c5d4506a320902
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/DEPEN__20210113_20210223210626.zip
-        sha256: b5c9e8fe92ccc77b3ce960b79225fc90d650f7e108e0eec1e6aab7f6775f52ab
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/CFVAL__20220227_20220305123016.zip
+        sha256: 36823543782bc3b0adae2b3569c3b4b4f7911fe779ab89df18b68b93436a67ff
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/DIVID__20210113_20210223210626.zip
-        sha256: a16dcc37859e49fb7e1744237253f3bd6ec8352080c039106bd25e9e68c666d7
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/DEPEN__20220222_20220305123016.zip
+        sha256: b2c76197a2e641acd8c8406be9afe987dce1333cbf58adc98cebee46cececbe3
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/ECA__20210515_20210517021546.zip
-        sha256: 4ca5efc7ac7bcba92bc024dac115f210669953dfc1131f6527a8668bba946c38
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/DIVID__20211211_20220305123016.zip
+        sha256: 371ea819cb384b337bae64b51e20e621301e669c9a5fce70f8108322b5ca1fc7
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/IDOSO__20201207_20210223210626.zip
-        sha256: f7baeae09c36ce1c859fd9557aa16be302764b6e4a7cdcd884667c8702db070d
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/ECA__20220217_20220305124320.zip
+        sha256: 26fd7670b1afbc70608eaff44c2bc1732f4d53546fd72e03c2bef2cf3c4e0ac2
         strip-components: 2
       - type: archive
-        url: http://downloadirpf.receita.fazenda.gov.br/irpf/2021/irpf/update/NATOC__20210113_20210223210626.zip
-        sha256: 28c6f4c4d1ca2c07909a12af04799677bf2382d828db34c2eca3840c922b426f
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/IDOSO__20220217_20220305124320.zip
+        sha256: bd81466a14af8a3123f945250876e0f71b04f23420f856b4cb7c9595ee9ecabf
+        strip-components: 2
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/LINKS__20220304_20220305123016.zip
+        sha256: 805143e8804419203a1d204c663efcecd46150500cc3ab422dc362ac2ad714a7
+        strip-components: 2
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/NATOC__20211211_20220305123016.zip
+        sha256: 4e592e13d4709842973d85d0f7828b6d7acbb8f2bbe1a8b5d90188da5783ef22
+        strip-components: 2
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/OCPRI__20220301_20220305123016.zip
+        sha256: e0eabb8f10b3202cab42e095006088ca41ef9fdf2e3345788c78e80a603e4bb4
+        strip-components: 2
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/PAIS__20211211_20220305123016.zip
+        sha256: 5e7d8aa9204be3d164aa6c56d0764e9b446865f04a1a7a0b410317d9927a305d
+        strip-components: 2
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/PGTOS__20220227_20220305123016.zip
+        sha256: f089edac9175e4b1a29691abc1d7259492de37226333720236128344d85dab24
+        strip-components: 2
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/RENDI__20220303_20220305123016.zip
+        sha256: 1f9e426cb4bb3a24cd4c5a1905bb42412ec76d41953d111b5f8851087c89d0d8
         strip-components: 2
     modules:
       - name: openjdk
