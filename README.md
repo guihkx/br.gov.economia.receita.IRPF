@@ -1,6 +1,6 @@
-# IRPF 2021 via Flatpak 📦
+# IRPF 2022 via Flatpak 📦
 
-Este repositório contém os arquivos metadados necessários para criar e rodar o programa de declaração de imposto de renda [IRPF 2021](https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/download/pgd/dirpf) via [Flatpak](https://flatpak.org/).
+Este repositório contém os arquivos metadados necessários para criar e rodar o programa de declaração de imposto de renda [IRPF 2022](https://www.gov.br/receitafederal/pt-br/centrais-de-conteudo/download/pgd/dirpf) via [Flatpak](https://flatpak.org/).
 
 Versões prontas estão disponíveis para download na página [*Releases*](https://github.com/guihkx/br.gov.economia.receita.IRPF/releases).
 
@@ -16,7 +16,7 @@ Versões prontas estão disponíveis para download na página [*Releases*](https
     ```
 
 4. Digite sua senha e confirme a instalação
-5. Pronto! Você irá encontrar o programa `IRPF 2021` na categoria `Internet`.
+5. Pronto! Você irá encontrar o programa `IRPF 2022` na categoria `Internet`.
 
 ## O que não funciona?
 
