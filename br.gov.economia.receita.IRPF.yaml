@@ -64,8 +64,8 @@ modules:
     buildsystem: simple
     build-commands:
       - install -Dm644 *.xml "${FLATPAK_DEST}/share/br.gov.economia.receita.IRPF/lib/resources"
-  # A bunch of zipped, XML resource files below
-  # These can be generated using the 'gen_zip_assets.py' script under the 'tools' directory
+    # A bunch of zipped, XML resource files below
+    # These can be generated using the 'gen_zip_assets.py' script under the 'tools' directory
     sources:
       - type: archive
         url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/AJUST__20211221_20220305123016.zip
