@@ -104,8 +104,12 @@ modules:
         sha256: bd81466a14af8a3123f945250876e0f71b04f23420f856b4cb7c9595ee9ecabf
         strip-components: 2
       - type: archive
-        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/LINKS__20220304_20220305123016.zip
-        sha256: 805143e8804419203a1d204c663efcecd46150500cc3ab422dc362ac2ad714a7
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/LINKS__20220310_20220311101013.zip
+        sha256: 79a6de1691adcbf3537ed2317961a2708bd181484cbe02b42dcbf6a54a5e0049
+        strip-components: 2
+      - type: archive
+        url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/MSGS__20220311_20220311174757.zip
+        sha256: 7f58db3fa046cf6ed4b34da665f94779799ed592f59118e59c4269bdb2f9ad00
         strip-components: 2
       - type: archive
         url: https://downloadirpf.receita.fazenda.gov.br/irpf/2022/irpf/update/NATOC__20211211_20220305123016.zip
