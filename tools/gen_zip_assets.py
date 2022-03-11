@@ -8,8 +8,11 @@ import xml.etree.ElementTree as ET
 
 ASSETS_URL = 'https://downloadirpf.receita.fazenda.gov.br/irpf/{year:d}/irpf/update/{path:s}'
 
+def eprint(*args, **kwargs):
+    print(*args, file=sys.stderr, **kwargs)
+
 def usage():
-    print(f'Usage: {sys.argv[0]} <year>')
+    eprint(f'Usage: {sys.argv[0]} <year>')
     sys.exit(1)
 
 if len(sys.argv) < 2:
@@ -19,38 +22,38 @@ else:
     if year.isnumeric():
         year = int(year)
     else:
-        print('Error: Year argument must be numeric.')
+        eprint('Error: Year argument must be numeric.')
         usage()
 
 final_url = ASSETS_URL.format(year = year, path = 'latest.xml')
 
-print('Requesting URL:', final_url)
+eprint('Requesting URL:', final_url)
 
 try:
     r = requests.get(final_url)
 except Exception as err:
-    print('Error:', err)
+    eprint('Error:', err)
     sys.exit(1)
 
 if r.status_code != 200:
-    print('Error: Unexpected HTTP response code:', r.status_code)
+    eprint('Error: Unexpected HTTP response code:', r.status_code)
     sys.exit(1)
 
 try:
     root = ET.fromstring(r.text)
 except:
-    print('Error: Unable to parse the following data as XML:\n')
-    print(r.text)
+    eprint('Error: Unable to parse the following data as XML:\n')
+    eprint(r.text)
     sys.exit(1)
 
 zip_assets = root.findall('.//extra/files/file')
 total = len(zip_assets)
 
 if total == 0:
-    print('Found no zip assets.')
+    eprint('Found no zip assets.')
     sys.exit(1)
 
-print('Found a total of', len(zip_assets), 'zip assets.')
+eprint('Found a total of', len(zip_assets), 'zip assets.')
 count = 1
 assets = []
 
@@ -59,17 +62,17 @@ for file in zip_assets:
     path = file.find('filePackageName').text
 
     if not path.endswith('.zip'):
-        print(f'WARNING: Ignoring asset \'{path}\' because it doesn\'t seem to be a zip asset.')
+        eprint(f'WARNING: Ignoring asset \'{path}\' because it doesn\'t seem to be a zip asset.')
         count += 1
         continue
 
     zip_url = ASSETS_URL.format(year = year, path = path)
 
     try:
-        print(f'Requesting zip asset #{count} of #{total} at:', zip_url)
+        eprint(f'Requesting zip asset #{count} of #{total} at:', zip_url)
         r = requests.get(zip_url)
     except Exception as err:
-        print('Error:', err)
+        eprint('Error:', err)
         sys.exit(1)
 
     sha256 = hashlib.sha256(r.content).hexdigest()
@@ -83,11 +86,11 @@ for file in zip_assets:
 
 assets = sorted(assets, key = lambda i: i['id'])
 
-print('\nDone! YAML-formatted response:')
+eprint('Done.')
 
-print('\nsources:')
+print('    sources:')
 for asset in assets:
-    print('  - type: archive')
-    print('    url:', asset['url'])
-    print('    sha256:', asset['sha256'])
-    print('    strip-components: 2')
+    print('      - type: archive')
+    print('        url:', asset['url'])
+    print('        sha256:', asset['sha256'])
+    print('        strip-components: 2')
